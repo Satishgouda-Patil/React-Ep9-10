@@ -19,7 +19,7 @@ const Body=()=>{
   }
   if(dataLists.length===0){
     return(
-      <div className="con">
+      <div className="flex flex-wrap">
         <Shimmer/>
         <Shimmer/>
         <Shimmer/>
@@ -34,26 +34,27 @@ const Body=()=>{
     )
   }
     return(
-        <div className="body container">
-            <div className="search">
-                <div className="search">
-                  <label className="search-icon">&#128270;</label>
-                  <input placeholder="Search your dish" value={searchItem}/*the value field isn.t neccesary */ onChange={(e)=>{setsearchItem(e.target.value)}}></input>
-                  <button onClick={()=>{
+        <div className="ml-8">
+            <div className="flex items-center justify-between">
+                <div className="flex">
+                  <div className="rounded-md">
+                    <label className="search-icon">&#128270;</label>
+                    <input className="bg-gray-50  m-2 p-2 border-2 border-black rounded-md" placeholder="Search your dish" value={searchItem}/*the value field isn.t neccesary */ onChange={(e)=>{setsearchItem(e.target.value)}}></input>
+                    <button className="bg-orange-400 m-2 p-2 rounded-md" onClick={()=>{
                     let variable=dataLists.filter((res)=>res.info.name.toLowerCase().includes(searchItem.toLowerCase()));
-                    setfilterdDataList(variable)
+                    setfilterdDataList(variable)  
                   }
                   } type="click">Search</button>
+                  </div>
                 </div>
-                <label className="search-icon">filter by ratings</label>
-                <button onClick={()=>{
+                <button className="bg-orange-400  p-2 rounded-md mr-12" onClick={()=>{
                   let filteredData=dataLists.filter(x=>(x.info.avgRating)>=4.5)
                   console.log(filteredData)
                   setfilterdDataList(filteredData)
                 }} type="click">Click to filter</button>
 
             </div>
-           <div className="row col">
+           <div className="flex flex-wrap">
               {
                 filterdLists.map(resto=>(
                   <Link key={resto.info.id} to={"/restaurant/"+resto.info.id }><Cards resData={resto}/></Link>
